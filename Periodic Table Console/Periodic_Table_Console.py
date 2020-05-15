@@ -36,7 +36,7 @@ class element:
         print("Block of element         :",self.block)
     
     def tabular_display(self):
-        print(self.atomic_no,"         ",self.symbol,"    ",self.name,"     ",self.mass)
+        print(self.atomic_no,"        ",self.symbol,"   ",self.name,"    ",self.mass)
     
     def ret_atomicno(self):
         return self.atomic_no
@@ -201,7 +201,57 @@ def search_display():
         else:
             print("Search unsuccessful!!")
         choice = str(input("Do you want to do more y/n ::"))
-        
+
+def disp_range():
+    choice = 'y'
+    while choice == 'y':
+        print("            ***********************************************            ")
+        print("            |            DISPLAY by RANGE                 |            ")
+        print("            ***********************************************            ")
+        first = int(input("Enter the First element of range :: "))
+        last = int(input("Enter the Last element of range  :: "))
+        print("**********************************************")
+        print(" Atomic no  Symbol       Name      Mass")
+        print("**********************************************")
+        for i in range(first,last):
+            e[i].tabular_display()
+        choice = str(input("Do you want to do more y/n ::"))
+
+def disp_state():
+    choice = 'y'
+    state ="unknown"
+    while choice == 'y':
+        print("            ***********************************************            ")
+        print("            |             LIST BY SOLID/LIQUID/GAS        |            ")
+        print("            ***********************************************            ")
+        print("[1].Solid")
+        print("[2].Liquid")
+        print("[3].Gas")
+        print("[4].Unknown")
+        s_choice = int(input("Enter the choice state of elements to display ::"))
+        if s_choice == 1:
+            state = "solid"
+        elif s_choice == 2:
+            state = "liquid"
+        elif s_choice == 3:
+            state = "gas"
+        elif s_choice == 4:
+            state = "unknown"
+        else:
+            print("Invalid choice!!")
+            continue
+        print("**********************************************")
+        print(" Atomic no  Symbol       Name      Mass")
+        print("**********************************************")
+        for i in range(0,118):
+            if e[i].ret_state == state:
+                e[i].tabular_display()
+        #else:
+           #print("Not found!!")
+        choice = str(input("Do you want to do more y/n ::"))
+
+
+       
 def list_isotopes():
     choice = 'y'
     while choice == 'y':
@@ -217,7 +267,7 @@ def list_isotopes():
                 e[i].tabular_display()
                 break
         else:
-            cout<<"No element to display\n"
+           print("No element to display")
         choice = str(input("Do you want to do more y/n ::"))
     
 
@@ -247,15 +297,15 @@ def menu():
         elif choice == 3:
             pass
         elif choice == 4:
-            pass
+            display_all()
         elif choice == 5:
             pass
         elif choice == 6:
-            pass
+            disp_range()
         elif choice == 7:
-            pass
+            disp_state()
         elif choice == 8:
-            pass
+            list_isotopes()
         elif choice == 9:
             pass
         else:
@@ -280,9 +330,8 @@ def main():
     print("---------------------------------------------------------------------------")
     sleep(3)
     screen_clear()
-    #data()
-    #menu()
+    menu()
 
-#main()
+main()
 
-list_isotopes()
+
