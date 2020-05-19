@@ -376,6 +376,7 @@ def main():
     screen_clear()
     menu()
 
-main()
+if __name__ == "__main__":
+   main()
 
 
