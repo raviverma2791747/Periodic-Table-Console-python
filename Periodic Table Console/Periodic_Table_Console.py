@@ -176,6 +176,7 @@ e = [ element(1,"H","Hydrogen",1.0079,"non metal","gas","1s1",3,'s'),
 def table():
     f = open("periodictable.txt","rt")
     print(f.read())
+    sleep(3)
 
 def display_all():
     print("            ***********************************************            ")
@@ -186,6 +187,7 @@ def display_all():
     print("**********************************************")
     for i in range(0,118):
         e[i].tabular_display();
+    sleep(3)
 
 def search_display():
     choice = 'y'
@@ -193,14 +195,30 @@ def search_display():
         print("            ***********************************************            ")
         print("            |                 SEARCH & DISPLAY            | ")           
         print("            ***********************************************            ")
-        search_atmno = int(intput("Enter the atomic number ::"))
+        search_atmno = int(input("Enter the atomic number ::"))
         for i in range(0,118):
-            if e[i].ret_atomicno == search_atmno:
+            if e[i].ret_atomicno() == search_atmno:
                 e[i].display()
                 break
         else:
             print("Search unsuccessful!!")
         choice = str(input("Do you want to do more y/n ::"))
+
+def search_symbol():
+   symbol = 'H'
+   choice = 'y'
+   while choice == 'y':
+      print("            ***********************************************            ")
+      print("            |                 SEARCH by SYMBOL            |            ")
+      print("            ***********************************************            ")
+      symbol = str(input("Enter the symbol of element to search ::"))
+      for i in range(0,118):
+         if e[i].ret_symb() == symbol:
+            e[i].display()
+            break
+      else:
+         print("Not found!!")
+      choice = str(input("Do you want to do more y/n ::"))
 
 def disp_range():
     choice = 'y'
@@ -216,6 +234,37 @@ def disp_range():
         for i in range(first,last):
             e[i].tabular_display()
         choice = str(input("Do you want to do more y/n ::"))
+
+def disp_block():
+   choice = 'y'
+   block = 's'
+   while choice == 'y':
+      print("            ***********************************************            ")
+      print("            |                 DISPLAY by BLOCK            |            ")
+      print("            ***********************************************            ")
+      print("[1]S Block")
+      print("[2]P Block")
+      print("[3]D Block")
+      print("[4]F Block")
+      schoice = int(input("Enter the choice of block of elements to display ::"))
+      if schoice == 1:
+         block = 's'
+      elif schoice == 2:
+         block = 'p'
+      elif schoice == 3:
+         block = 'd'
+      elif schoice == 4:
+         block = 'f'
+      else:
+         print("Invalid choice!!")
+         continue
+      print("**********************************************")
+      print(" Atomic no  Symbol       Name      Mass")
+      print("**********************************************")
+      for i in range(0,118):
+         if e[i].ret_block() == block:
+            e[i].tabular_display()
+      choice = str(input("Do you want to do more y/n ::"))
 
 def disp_state():
     choice = 'y'
@@ -244,7 +293,7 @@ def disp_state():
         print(" Atomic no  Symbol       Name      Mass")
         print("**********************************************")
         for i in range(0,118):
-            if e[i].ret_state == state:
+            if e[i].ret_state() == state:
                 e[i].tabular_display()
         #else:
            #print("Not found!!")
@@ -265,19 +314,16 @@ def list_isotopes():
         for i in range(0,118):
             if e[i].ret_isotope() == isotop:
                 e[i].tabular_display()
-                break
-        else:
-           print("No element to display")
         choice = str(input("Do you want to do more y/n ::"))
     
 
 
 def menu():
     choice = 0
-    print("            ***********************************************            ")
-    print("            |                 MAIN MENU                   |            ")
-    print("            ***********************************************            ")
     while choice != 9:
+        print("            ***********************************************            ")
+        print("            |                 MAIN MENU                   |            ")
+        print("            ***********************************************            ")
         print("[1]Periodic Table")
         print("[2]Search Specific Element")
         print("[3]Search by Symbol")
@@ -288,18 +334,16 @@ def menu():
         print("[8]List by Isotopes")
         print("[9]Exit")
         choice = int(input("Enter the choice from above ::"))
-        if choice == 0:
+        if choice == 1:
             table()
-        elif choice == 1:
-            pass
         elif choice == 2:
-            pass
+            search_display()
         elif choice == 3:
-            pass
+            search_symbol()
         elif choice == 4:
             display_all()
         elif choice == 5:
-            pass
+            disp_block()
         elif choice == 6:
             disp_range()
         elif choice == 7:
@@ -307,7 +351,7 @@ def menu():
         elif choice == 8:
             list_isotopes()
         elif choice == 9:
-            pass
+            exit(0)
         else:
             print("Invalid choice try again!!")
 
